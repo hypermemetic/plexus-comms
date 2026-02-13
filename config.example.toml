@@ -1,0 +1,75 @@
+# Plexus Communications Configuration Example
+# Copy this file to config.toml and customize for your setup
+
+# Email Configuration (choose one provider)
+[email]
+provider = "smtp"  # Options: smtp, sendgrid, ses, mailgun, postmark
+
+# SMTP Configuration
+smtp_host = "smtp.example.com"
+smtp_port = 587
+smtp_username = "your-username"
+smtp_password = "your-password"
+smtp_from = "noreply@example.com"
+
+# SendGrid Configuration (alternative)
+# provider = "sendgrid"
+# api_key = "your-sendgrid-api-key"
+# from_email = "noreply@example.com"
+# from_name = "Your App"
+
+# AWS SES Configuration (alternative)
+# provider = "ses"
+# region = "us-east-1"
+# from_email = "noreply@example.com"
+
+# SMS Configuration (choose one provider)
+[sms]
+provider = "twilio"  # Options: twilio, sns, vonage, messagebird
+
+# Twilio Configuration
+account_sid = "your-twilio-account-sid"
+auth_token = "your-twilio-auth-token"
+from_number = "+1234567890"
+
+# AWS SNS Configuration (alternative)
+# provider = "sns"
+# region = "us-east-1"
+
+# Push Notification Configuration
+[push]
+
+# iOS (APNs)
+[push.ios]
+key_file = "path/to/AuthKey_XXX.p8"
+key_id = "your-key-id"
+team_id = "your-team-id"
+environment = "production"  # or "sandbox"
+
+# Android (FCM)
+[push.android]
+service_account_key = "path/to/firebase-adminsdk.json"
+
+# Web Push (optional)
+[push.web]
+vapid_private_key = "your-vapid-private-key"
+vapid_public_key = "your-vapid-public-key"
+
+# Telegram Configuration
+[telegram]
+bot_token = "your-telegram-bot-token"
+mode = "polling"  # or { url = "https://your-webhook-url.com" }
+
+# WhatsApp Configuration
+[whatsapp]
+mode = { phone_number_id = "your-phone-number-id", access_token = "your-access-token", webhook_verify_token = "your-verify-token" }
+
+# Slack Configuration
+[slack]
+bot_token = "xoxb-your-slack-bot-token"
+app_token = "xapp-your-app-token"  # Optional, for Socket Mode
+mode = "socket"  # or { url = "https://your-webhook-url.com" }
+
+# Discord Configuration
+[discord]
+bot_token = "your-discord-bot-token"

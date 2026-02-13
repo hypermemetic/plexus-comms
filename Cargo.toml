@@ -1,0 +1,119 @@
+[package]
+name = "plexus-comms"
+version = "0.1.0"
+edition = "2021"
+description = "Communication integrations for Plexus RPC - email, SMS, messaging platforms"
+license = "AGPL-3.0-only"
+
+[dependencies]
+# Core dependencies
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+tokio-stream = "0.1"
+tokio-util = { version = "0.7", features = ["compat"] }
+futures = "0.3"
+futures-util = "0.3"
+async-trait = "0.1"
+async-stream = "0.3"
+
+# Schema generation
+schemars = { version = "1.1", features = ["derive", "uuid1"] }
+
+# Plexus RPC infrastructure (using local path dependencies)
+plexus-macros = { path = "../hypermemetic/plexus-macros" }
+plexus-core = { path = "../hypermemetic/plexus-core" }
+plexus-transport = { path = "../hypermemetic/plexus-transport" }
+
+# JSON-RPC server
+jsonrpsee = { version = "0.26", features = ["server", "client", "ws-client", "macros"] }
+
+# Utilities
+uuid = { version = "1.6", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "1.0"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "tracing-log"] }
+toml = "0.8"
+
+# HTTP client (for API-based providers)
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+
+# WebSocket client (for Discord Gateway)
+tokio-tungstenite = { version = "0.23", features = ["native-tls"] }
+
+# Email providers
+lettre = { version = "0.11", features = ["tokio1-rustls-tls", "builder", "smtp-transport"], default-features = false, optional = true }
+aws-sdk-sesv2 = { version = "1.0", optional = true }
+async-imap = { version = "0.9", optional = true }
+async-native-tls = { version = "0.5", optional = true }
+
+# Storage for accounts
+sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "sqlite", "chrono"] }
+
+# SMS providers
+aws-sdk-sns = { version = "1.0", optional = true }
+
+# Push notification providers
+a2 = { version = "0.10", optional = true }  # APNs
+
+# Messaging platform clients
+teloxide = { version = "0.13", features = ["macros"], optional = true }
+serenity = { version = "0.12", optional = true }  # Discord
+
+# Template support
+handlebars = "6.0"
+
+[features]
+default = ["email-smtp", "email-imap"]
+
+# Email providers
+email-smtp = ["lettre"]
+email-imap = ["async-imap", "async-native-tls"]
+email-sendgrid = []
+email-ses = ["aws-sdk-sesv2"]
+email-mailgun = []
+email-postmark = []
+
+# SMS providers
+sms-twilio = []
+sms-sns = ["aws-sdk-sns"]
+sms-vonage = []
+sms-messagebird = []
+
+# Push notification platforms
+push-apns = ["a2"]
+push-fcm = []
+push-webpush = []
+
+# Messaging platforms
+telegram = ["teloxide"]
+whatsapp = []
+slack = []
+discord = ["serenity"]
+
+# Enable all providers
+all-providers = [
+    "email-smtp", "email-sendgrid", "email-ses", "email-mailgun", "email-postmark",
+    "sms-twilio", "sms-sns", "sms-vonage", "sms-messagebird",
+    "push-apns", "push-fcm", "push-webpush",
+    "telegram", "whatsapp", "slack", "discord"
+]
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockito = "1.0"
+
+[[bin]]
+name = "plexus-comms"
+path = "src/main.rs"
+
+[lib]
+name = "plexus_comms"
+path = "src/lib.rs"
+
+# Use local versions of plexus crates for all dependencies
+[patch.crates-io]
+plexus-core = { path = "../hypermemetic/plexus-core" }
+plexus-macros = { path = "../hypermemetic/plexus-macros" }
