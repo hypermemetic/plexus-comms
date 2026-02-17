@@ -21,9 +21,9 @@ async-stream = "0.3"
 schemars = { version = "1.1", features = ["derive", "uuid1"] }
 
 # Plexus RPC infrastructure (using local path dependencies)
-plexus-macros = { path = "../hypermemetic/plexus-macros" }
-plexus-core = { path = "../hypermemetic/plexus-core" }
-plexus-transport = { path = "../hypermemetic/plexus-transport" }
+plexus-macros = { path = "../plexus-macros" }
+plexus-core = { path = "../plexus-core" }
+plexus-transport = { path = "../plexus-transport" }
 
 # JSON-RPC server
 jsonrpsee = { version = "0.26", features = ["server", "client", "ws-client", "macros"] }
@@ -50,7 +50,7 @@ async-imap = { version = "0.9", optional = true }
 async-native-tls = { version = "0.5", optional = true }
 
 # Storage for accounts
-sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "sqlite", "chrono"] }
+sqlx = { version = "0.6.3", features = ["runtime-tokio-rustls", "sqlite", "chrono"] }
 
 # SMS providers
 aws-sdk-sns = { version = "1.0", optional = true }
@@ -112,8 +112,3 @@ path = "src/main.rs"
 [lib]
 name = "plexus_comms"
 path = "src/lib.rs"
-
-# Use local versions of plexus crates for all dependencies
-[patch.crates-io]
-plexus-core = { path = "../hypermemetic/plexus-core" }
-plexus-macros = { path = "../hypermemetic/plexus-macros" }
