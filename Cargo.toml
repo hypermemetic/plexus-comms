@@ -1,6 +1,6 @@
 [package]
 name = "plexus-comms"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Communication integrations for Plexus RPC - email, SMS, messaging platforms"
 license = "AGPL-3.0-only"
