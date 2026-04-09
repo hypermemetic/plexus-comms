@@ -22,13 +22,13 @@ impl Whatsapp {
     }
 }
 
-#[plexus_macros::hub_methods(
+#[plexus_macros::activation(
     namespace = "whatsapp",
     version = "1.0.0",
     description = "Send and receive WhatsApp messages via Business API"
 )]
 impl Whatsapp {
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send a WhatsApp message",
         params(
             to = "Recipient phone number (E.164 format)",
@@ -54,7 +54,7 @@ impl Whatsapp {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Listen for incoming webhook events (messages, status updates)"
     )]

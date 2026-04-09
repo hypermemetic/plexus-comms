@@ -24,13 +24,13 @@ impl Sms {
     }
 }
 
-#[plexus_macros::hub_methods(
+#[plexus_macros::activation(
     namespace = "sms",
     version = "1.0.0",
     description = "Send SMS messages via multiple providers (Twilio, SNS, Vonage, MessageBird)"
 )]
 impl Sms {
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send an SMS message",
         params(
             to = "Recipient phone number (E.164 format)",
@@ -58,7 +58,7 @@ impl Sms {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Send multiple SMS messages with progress tracking",
         params(messages = "List of SMS messages to send")
@@ -104,7 +104,7 @@ impl Sms {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Check delivery status of an SMS message",
         params(message_id = "Message ID returned from send")
     )]

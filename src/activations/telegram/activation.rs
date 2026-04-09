@@ -22,13 +22,13 @@ impl Telegram {
     }
 }
 
-#[plexus_macros::hub_methods(
+#[plexus_macros::activation(
     namespace = "telegram",
     version = "1.0.0",
     description = "Send and receive messages via Telegram Bot API"
 )]
 impl Telegram {
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send a text message",
         params(
             chat_id = "Chat ID or username",
@@ -60,7 +60,7 @@ impl Telegram {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send a photo",
         params(
             chat_id = "Chat ID or username",
@@ -88,7 +88,7 @@ impl Telegram {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Listen for incoming updates (messages, callbacks, etc.)"
     )]

@@ -34,7 +34,7 @@ impl Discord {
     }
 }
 
-#[plexus_macros::hub_methods(
+#[plexus_macros::activation(
     namespace = "discord",
     version = "2.0.0",
     description = "Multi-account Discord bot integration with message sending and webhooks"
@@ -42,7 +42,7 @@ impl Discord {
 impl Discord {
     // ==================== Account Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Register a new Discord bot account",
         params(
             name = "Account name (identifier for this bot)",
@@ -74,7 +74,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List all registered Discord bot accounts"
     )]
@@ -101,7 +101,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Remove a Discord bot account",
         params(name = "Account name to remove")
     )]
@@ -122,7 +122,7 @@ impl Discord {
 
     // ==================== Discord API Operations ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send a message to a Discord channel from a registered bot account",
         params(
             account = "Account name to send from",
@@ -181,7 +181,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Create a webhook for a Discord channel using a registered bot account",
         params(
             account = "Account name to use",
@@ -244,7 +244,7 @@ impl Discord {
 
     // ==================== Gateway Listener ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Start listening for Discord events via Gateway for a specific bot account",
         params(account = "Account name to start listening for")
@@ -384,7 +384,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Stop listening for Discord events for a specific bot account",
         params(account = "Account name to stop listening for")
     )]
@@ -410,7 +410,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List all bot accounts currently listening via Gateway"
     )]
@@ -436,7 +436,7 @@ impl Discord {
 
     // ==================== Guild/Server Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List all guilds the bot is in",
         params(account = "Account name to use")
@@ -487,7 +487,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Get detailed guild information including roles and channels",
         params(
             account = "Account name to use",
@@ -540,7 +540,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List all channels in a guild",
         params(
@@ -595,7 +595,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List members in a guild (paginated)",
         params(
@@ -655,7 +655,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List all roles in a guild",
         params(
@@ -714,7 +714,7 @@ impl Discord {
 
     // ==================== Channel Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Get channel information",
         params(
             account = "Account name to use",
@@ -766,7 +766,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Create a new channel in a guild (type: 0=text, 2=voice, 4=category)",
         params(
             account = "Account name to use",
@@ -819,7 +819,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Modify a channel's properties",
         params(
             account = "Account name to use",
@@ -872,7 +872,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Delete a channel",
         params(
             account = "Account name to use",
@@ -918,7 +918,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Get message history from a channel",
         params(
@@ -974,7 +974,7 @@ impl Discord {
 
     // ==================== Member Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Get member information",
         params(
             account = "Account name to use",
@@ -1033,7 +1033,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Modify a guild member's nickname or roles",
         params(
             account = "Account name to use",
@@ -1085,7 +1085,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Kick a member from a guild",
         params(
             account = "Account name to use",
@@ -1135,7 +1135,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Ban a member from a guild",
         params(
             account = "Account name to use",
@@ -1187,7 +1187,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Unban a member from a guild",
         params(
             account = "Account name to use",
@@ -1235,7 +1235,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Get list of bans for a guild",
         params(
@@ -1291,7 +1291,7 @@ impl Discord {
 
     // ==================== Role Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Create a new role in a guild",
         params(
             account = "Account name to use",
@@ -1344,7 +1344,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Modify a role's properties",
         params(
             account = "Account name to use",
@@ -1399,7 +1399,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Delete a role",
         params(
             account = "Account name to use",
@@ -1447,7 +1447,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Add a role to a member",
         params(
             account = "Account name to use",
@@ -1498,7 +1498,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Remove a role from a member",
         params(
             account = "Account name to use",
@@ -1551,7 +1551,7 @@ impl Discord {
 
     // ==================== Message Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Edit an existing message",
         params(
             account = "Account name to use",
@@ -1604,7 +1604,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Delete a message",
         params(
             account = "Account name to use",
@@ -1653,7 +1653,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Add a reaction to a message (emoji can be unicode or custom emoji format)",
         params(
             account = "Account name to use",
@@ -1705,7 +1705,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Pin a message in a channel",
         params(
             account = "Account name to use",
@@ -1754,7 +1754,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Unpin a message from a channel",
         params(
             account = "Account name to use",
@@ -1805,7 +1805,7 @@ impl Discord {
 
     // ==================== Thread Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Create a thread from a message or in a channel",
         params(
             account = "Account name to use",
@@ -1856,7 +1856,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Join a thread",
         params(
             account = "Account name to use",
@@ -1902,7 +1902,7 @@ impl Discord {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Leave a thread",
         params(
             account = "Account name to use",

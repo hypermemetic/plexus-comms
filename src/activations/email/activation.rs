@@ -37,7 +37,7 @@ impl Email {
     }
 }
 
-#[plexus_macros::hub_methods(
+#[plexus_macros::activation(
     namespace = "email",
     version = "2.0.0",
     description = "Multi-account email with IMAP reading and SMTP sending"
@@ -45,7 +45,7 @@ impl Email {
 impl Email {
     // ==================== Account Management ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Register a new email account with SMTP and/or IMAP credentials",
         params(
             name = "Account name (typically the email address)",
@@ -82,7 +82,7 @@ impl Email {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "List all registered email accounts"
     )]
@@ -112,7 +112,7 @@ impl Email {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Remove an email account",
         params(name = "Account name to remove")
     )]
@@ -133,7 +133,7 @@ impl Email {
 
     // ==================== SMTP Sending ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send an email from a registered account",
         params(
             account = "Account name to send from",
@@ -235,7 +235,7 @@ impl Email {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Send multiple emails with progress tracking from a registered account",
         params(
@@ -340,7 +340,7 @@ impl Email {
 
     // ==================== IMAP Reading ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Read inbox messages from a registered account",
         params(
@@ -412,7 +412,7 @@ impl Email {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Search messages in a registered account",
         params(
@@ -484,7 +484,7 @@ impl Email {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Mark a message as read",
         params(
             account = "Account name",
@@ -547,7 +547,7 @@ impl Email {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Mark a message as unread",
         params(
             account = "Account name",
@@ -612,7 +612,7 @@ impl Email {
 
     // ==================== Template Management (kept from original) ====================
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Validate an email address",
         params(email = "Email address to validate")
     )]

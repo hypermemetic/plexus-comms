@@ -24,13 +24,13 @@ impl Push {
     }
 }
 
-#[plexus_macros::hub_methods(
+#[plexus_macros::activation(
     namespace = "push",
     version = "1.0.0",
     description = "Send push notifications to iOS (APNs), Android (FCM), and Web"
 )]
 impl Push {
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         description = "Send a push notification",
         params(
             device_token = "Device token",
@@ -75,7 +75,7 @@ impl Push {
         }
     }
 
-    #[plexus_macros::hub_method(
+    #[plexus_macros::method(
         streaming,
         description = "Send multiple push notifications with progress tracking",
         params(notifications = "List of push notifications to send")
