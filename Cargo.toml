@@ -113,8 +113,3 @@ path = "src/main.rs"
 name = "plexus_comms"
 path = "src/lib.rs"
 
-# Use local versions during development:
-[patch.crates-io]
-plexus-core = { path = "../plexus-core" }
-plexus-macros = { path = "../plexus-macros" }
-plexus-transport = { path = "../plexus-transport" }
